@@ -22,10 +22,10 @@ def prepare():
     plurality_test.write("def plurality_test():\n")
     plurality_test.write("\tglobal candidates\n")
     plurality_test.write("\tcandidates = {'Alice': 0, 'Bob': 0, 'Charles': 0}\n")
-    plurality_test.write("\tif vote(sys.argv[1]):\n\t\tsys.exit(0)\n\telse:\n\t\tsys.exit(1)\n")
+    plurality_test.write("\tif vote(sys.argv[1]):\n\t\tsys.exit(0)\n\telse:\n\t\tsys.exit(1)\n\n")
     plurality_test.write("plurality_test()")
     plurality_test.close()
-
+    
 
 @check50.check(exists)
 def vote_check1():
