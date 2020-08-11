@@ -29,25 +29,19 @@ def vote_check3():
 @check50.check(exists)
 def vote_check4():
     """vote returns false when given name of invalid candidate"""
-    check50.run("python3 plurality_test.py RickRoll").exit(1)
+    check50.run("python3 plurality_test.py RickRoll").exit(0)
 
 
 @check50.check(exists)
 def vote_check5():
-    """vote produces correct counts when all votes are zero"""
-    check50.run("python3 plurality_test.py").exit(0)
-
-
-@check50.check(exists)
-def vote_check6():
     """vote produces correct counts after some have already voted"""
     check50.run("python3 plurality_test.py Alice").exit(0)
 
 
 @check50.check(exists)
-def vote_check7():
+def vote_check6():
     """vote leaves vote counts unchanged when voting for invalid candidate"""
-    check50.run("python3 plurality_test.py RickRollRoll").exit(0)
+    check50.run("python3 plurality_test.py RickRoll").exit(0)
 
 
 @check50.check(exists)

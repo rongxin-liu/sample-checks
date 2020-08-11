@@ -2,33 +2,28 @@ import sys
 from plurality import vote, print_winner
 
 def main():
-
     global candidates
     candidates = {'Alice': 0, 'Bob': 0, 'Charles': 0}
-    before_vote = {'Alice': 0, 'Bob': 0, 'Charles': 0}
-    
-    if len(sys.argv) == 1:
-        try:
-            assert(candidates==before_vote)
-            return 0
-        except:
-            return 1
-    
-    if sys.argv[1] == "RickRollRoll":
-        vote(sys.argv[1], candidates)
-        try:
-            assert(candidates==before_vote)
-            return 0
-        except:
-            return 1
+    before_vote = dict.copy(candidates)
 
-    if vote(sys.argv[1], candidates):
-        if candidates[sys.argv[1]] - before_vote[sys.argv[1]] == 1:
-            return 0
-        else:
-            return 1
+    if sys.argv[1] in candidates:
+
+        # vote returns true when given name of first candidate
+        # vote returns true when given name of middle candidate
+        # vote returns true when given name of last candidate
+        # vote produces correct counts after some have already voted
+        assert vote(sys.argv[1], candidates) == True
+        assert candidates[sys.argv[1]] - before_vote[sys.argv[1]] == 1
+        del candidates[sys.argv[1]]
+        del before_vote[sys.argv[1]]
+        assert candidates == before_vote
     else:
-        sys.exit(1)
+
+        # vote returns false when given name of invalid candidate
+        # vote leaves vote counts unchanged when voting for invalid candidate
+        assert vote(sys.argv[1], candidates) == False
+        assert candidates == before_vote
+    
 
 if __name__ == "__main__":
     main()
