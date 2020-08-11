@@ -1,6 +1,8 @@
 check50:
-  checks: checks.py
-  files:
+  files: &check50_files
     - !exclude "*"
     - !include "*.py"
     - !require plurality.py
+
+submit50:
+  files: *check50_files

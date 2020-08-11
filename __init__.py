@@ -5,27 +5,7 @@ import check50
 def exists():
     """plurality.py exists"""
     check50.exists("plurality.py")
-
-
-@check50.check(exists)
-def prepare():
-    """plurality_test.py created"""
-    plurality = open("plurality.py")
-    plurality_test = open("plurality_test.py", "w")
-
-    for line in plurality.readlines():
-        if "__main__" in line:
-            break
-        else:  
-            plurality_test.write(line)
-
-    plurality.close()
-    plurality_test.write("def plurality_test():\n")
-    plurality_test.write("\tglobal candidates\n")
-    plurality_test.write("\tcandidates = {'Alice': 0, 'Bob': 0, 'Charles': 0}\n")
-    plurality_test.write("\tif vote(sys.argv[1]):\n\t\tsys.exit(0)\n\telse:\n\t\tsys.exit(1)\n\n")
-    plurality_test.write("plurality_test()")
-    plurality_test.close()
+    check50.include("plurality_test.py")
 
 
 @check50.check(exists)
@@ -50,6 +30,24 @@ def vote_check3():
 def vote_check4():
     """vote returns false when given name of invalid candidate"""
     check50.run("python3 plurality_test.py RickRoll").exit(1)
+
+
+@check50.check(exists)
+def vote_check5():
+    """vote produces correct counts when all votes are zero"""
+    check50.run("python3 plurality_test.py").exit(0)
+
+
+@check50.check(exists)
+def vote_check6():
+    """vote produces correct counts after some have already voted"""
+    check50.run("python3 plurality_test.py Alice").exit(0)
+
+
+@check50.check(exists)
+def vote_check7():
+    """vote leaves vote counts unchanged when voting for invalid candidate"""
+    check50.run("python3 plurality_test.py RickRollRoll").exit(0)
 
 
 @check50.check(exists)
