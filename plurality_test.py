@@ -1,5 +1,5 @@
 import sys
-from plurality import vote, print_winner
+from plurality import vote
 
 def main():
     global candidates
