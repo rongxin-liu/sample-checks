@@ -28,7 +28,7 @@ def main():
         assert not vote(candidate, candidates)
 
         # vote count stays the same
-        assert candidates[candidate] == candidates_[candidate]
+        assert candidates == candidates_
 
 
 if __name__ == "__main__":
