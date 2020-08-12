@@ -1,30 +1,27 @@
 import sys
+
 from plurality import vote
+
 
 def main():
     global candidates
     candidates = {'Alice': 0, 'Bob': 0, 'Charles': 0}
-    before_vote = dict.copy(candidates)
+    
+    candidate = sys.argv[1]
+    votes_before = candidates[candidate]
+    
+    if candidate in candidates:      
+        # vote returns True when candidate exists
+        assert vote(candidate, candidates)
 
-    if sys.argv[1] in candidates:
-
-        # vote returns true when given name of first candidate
-        # vote returns true when given name of middle candidate
-        # vote returns true when given name of last candidate
-        assert vote(sys.argv[1], candidates) == True
-
-        # vote produces correct counts after some have already voted
-        assert candidates[sys.argv[1]] - before_vote[sys.argv[1]] == 1
-        del candidates[sys.argv[1]]
-        del before_vote[sys.argv[1]]
-        assert candidates == before_vote
+        # vote adds vote to candidate
+        assert (candidates[candidate] - votes_before) == 1
     else:
+        # vote returns False when candidate doesn't exist
+        assert not vote(candidate, candidates)
 
-        # vote returns false when given name of invalid candidate
-        assert vote(sys.argv[1], candidates) == False
-
-        # vote leaves vote counts unchanged when voting for invalid candidate
-        assert candidates == before_vote
+        # vote count stays the same
+        assert candidates[candidate] == votes_before
     
 
 if __name__ == "__main__":
