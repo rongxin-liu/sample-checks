@@ -1,8 +1,7 @@
 check50:
   files: &check50_files
     - !exclude "*"
-    - !include "*.py"
-    - !require plurality.py
+    - !required "hello.py"
 
 submit50:
   files: *check50_files
